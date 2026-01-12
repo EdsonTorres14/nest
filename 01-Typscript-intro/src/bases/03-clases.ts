@@ -1,15 +1,4 @@
-// export class Pokemon {
-//     public id: number;
-//     public name: string;
-
-//     constructor(id: number, name: string) {
-//         this.id = id;
-//         this.name = name;
-//         console.log('constructor llamado')
-//     }
-// }
-
-// Forma corta
+import axios from 'axios';
 
 export class Pokemon {
     get imageUrl(): string {
@@ -29,13 +18,26 @@ export class Pokemon {
     speack() {
         console.log(`${this.name}, ${this.name}`)
     }
+
+    async getMoves() {
+        // const moves = 10;
+
+        const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/4')
+        
+        console.log(data.moves);
+
+        return data.moves;
+    }
 }
 
 export const charmander = new Pokemon(4, 'Charmander')
 
 
 
-console.log(charmander.imageUrl)
+// console.log(charmander.imageUrl)
 
-charmander.speack();
-charmander.scream();
+// charmander.speack();
+// charmander.scream();
+
+charmander.getMoves()
+
